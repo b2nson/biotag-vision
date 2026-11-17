@@ -21,7 +21,7 @@ A camera on an NVIDIA Jetson Orin Nano finds the BioTag sticker on an item and d
 | `scripts/` | Make training data, train the models, export to the Jetson |
 | `app/` | Live camera + screen app |
 | `esp32/` | Starter code for the bin's lid controller |
-| `assets/stickers/` | Placeholder tags until we have photos of the real ones |
+| `assets/stickers/` | Photos of the BioTag stickers, one folder per bin |
 
 ## Quick start
 
@@ -35,7 +35,8 @@ python scripts/train_classifier.py
 
 ## Next steps
 
-- [ ] Photos of the real BioTag stickers
+- [x] Photos of the real BioTag stickers
+- [ ] Add the sticker photos to `assets/stickers/`
 - [ ] Real photos of covered, stained and damaged tags
 - [ ] First training run
 - [ ] Set up and test on the Jetson
