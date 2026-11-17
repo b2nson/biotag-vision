@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.pt
+*.engine
+*.onnx
+runs/
+data/*
+!data/real/
+data/real/*
+!data/real/.keep
+logs/
+.venv/
