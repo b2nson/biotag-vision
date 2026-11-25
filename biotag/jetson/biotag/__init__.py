@@ -1,0 +1,3 @@
+"""BioTag smart-bin software for the Jetson Orin Nano."""
+
+__version__ = "1.0.0"

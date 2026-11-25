@@ -1,0 +1,47 @@
+# BioTag configuration. Anything left out falls back to biotag/config.py DEFAULTS.
+
+camera:
+  type: csi            # csi (Pi Camera) | zed (ZED 2) | esp32cam | usb | mock
+  width: 1280
+  height: 720
+  fps: 30
+  csi:
+    sensor_id: 0       # CAM0 = 0, CAM1 = 1
+    flip_method: 0     # 2 = rotate 180 degrees
+  zed:
+    use_sdk: true      # false = plain UVC, no depth, no ZED SDK needed
+    device: 0
+    depth: true
+  esp32cam:
+    url: "http://192.168.4.1"   # AP mode default; in station mode use the printed IP
+    stream_port: 81
+  usb:
+    device: 0
+  mock:
+    path: samples
+
+link:
+  enabled: true
+  port: /dev/ttyTHS1   # 40-pin header UART. With a USB cable use /dev/ttyUSB0
+  baud: 115200
+
+classifier:
+  enabled: true
+  model: models/biotag.engine   # missing file = tag-only mode, with a warning
+
+decision:
+  tag_grace_s: 0.7
+  min_votes: 4
+  accept_conf: 0.65
+  unsure_after_s: 3.0
+
+lid:
+  open_ms: 8000
+  cooldown_s: 1.5
+
+materials:
+  local_overrides: {}  # e.g. {PLA: L} if your compost hauler rejects bioplastics
+
+display:
+  enabled: true
+  fullscreen: false

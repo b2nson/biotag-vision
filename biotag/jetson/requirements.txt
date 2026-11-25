@@ -1,0 +1,14 @@
+# On the Jetson, do NOT pip-install opencv-python: it replaces the JetPack build
+# and removes GStreamer (CSI camera) support. Use the system OpenCV instead:
+#   sudo apt install python3-opencv
+# On a laptop for desk testing, `pip install opencv-python` is fine.
+numpy
+pyserial>=3.5
+pyyaml
+qrcode[pil]          # tools/generate_tags.py
+pytest               # tests
+pyzbar               # second QR decoder, much better on stained tags. Needs: sudo apt install libzbar0
+
+# Optional:
+# ultralytics        # vision fallback; on Jetson follow docs/setup_jetson.md for torch
+# pyzed              # installed by the ZED SDK installer, not pip

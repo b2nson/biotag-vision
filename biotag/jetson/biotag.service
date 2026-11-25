@@ -1,0 +1,15 @@
+[Unit]
+Description=BioTag smart bin
+After=graphical.target
+
+[Service]
+# Edit the user name and paths to match your Jetson.
+User=jetson
+WorkingDirectory=/home/jetson/biotag/jetson
+Environment=DISPLAY=:0
+ExecStart=/usr/bin/python3 -m biotag.main --config config.yaml
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=graphical.target

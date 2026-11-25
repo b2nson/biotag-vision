@@ -1,0 +1,19 @@
+{
+  "PET":       {"name": "PET plastic (#1)",        "bin": "R", "note": "Empty and re-cap bottles."},
+  "HDPE":      {"name": "HDPE plastic (#2)",       "bin": "R", "note": "Jugs and tubs, emptied."},
+  "PP":        {"name": "Polypropylene (#5)",      "bin": "R", "note": "Tubs and lids, emptied."},
+  "PLASTIC":   {"name": "Plastic container",       "bin": "R", "note": "Bottle, tub or jug shapes only."},
+  "LDPE":      {"name": "Plastic film / bag (#4)", "bin": "L", "note": "Film tangles sorting machines."},
+  "PS":        {"name": "Polystyrene / foam (#6)", "bin": "L", "note": "Not accepted curbside."},
+  "ALU":       {"name": "Aluminum",                "bin": "R", "note": "Cans, clean foil."},
+  "STEEL":     {"name": "Steel / tin",             "bin": "R", "note": "Food cans, emptied."},
+  "GLASS":     {"name": "Glass",                   "bin": "R", "note": "Bottles and jars."},
+  "PAPER":     {"name": "Paper",                   "bin": "R", "note": "Clean and dry."},
+  "CARDBOARD": {"name": "Cardboard",               "bin": "R", "note": "Flatten boxes."},
+  "FIBER":     {"name": "Compostable fiber",       "bin": "C", "note": "Food-soiled paper, napkins."},
+  "PLA":       {"name": "Compostable bioplastic",  "bin": "C", "note": "Certified compostable only."},
+  "FOOD":      {"name": "Food scraps",             "bin": "C", "note": ""},
+  "MIXED":     {"name": "Mixed / multi-layer",     "bin": "L", "note": "Cannot be separated."},
+  "CONTAM":    {"name": "Food or liquid residue",  "bin": "L", "note": "Contaminates recycling."},
+  "UNKNOWN":   {"name": "Unidentified item",       "bin": "L", "note": "When in doubt, throw it out."}
+}
