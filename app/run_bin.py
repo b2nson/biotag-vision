@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-BioTag smart-bin runtime for the Jetson Orin Nano.
+BioTag smart-bin runtime for the Jetson Orin Nano
 
 Pipeline per frame:
   camera -> YOLO26 detector (find tag + condition)
