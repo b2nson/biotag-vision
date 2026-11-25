@@ -4,6 +4,8 @@ ASSUMPTION: the BioTag sticker is a QR code whose text is
 
     BT1:<item_id>:<material>:<bin>        e.g.  BT1:000123:PET:R
 
+The printed stickers in assets/stickers/ (BIOTAG:<BIN>:<item_id>) are also accepted.
+
 If your real BioTag uses a different symbology or payload, only `parse_payload`
 and `TagReader._decode` need to change; the rest of the system uses `Tag`.
 
@@ -31,8 +33,18 @@ def make_payload(item_id: str, material: str, bin_id: str, prefix: str = "BT1") 
     return f"{prefix}:{item_id}:{material.upper()}:{bin_id.upper()}"
 
 
+# The printed stickers in assets/stickers/ use a shorter payload: BIOTAG:<BIN>:<item_id>
+# e.g. BIOTAG:COMPOST:001000. It names the bin but not the material.
+_STICKER_BINS = {"RECYCLE": "R", "COMPOST": "C", "LANDFILL": "L"}
+
+
 def parse_payload(text: str, prefix: str = "BT1") -> Optional[Tag]:
     parts = text.strip().split(":")
+    if len(parts) == 3 and parts[0].upper() == "BIOTAG":
+        bin_name, item_id = parts[1].upper(), parts[2]
+        if bin_name in _STICKER_BINS and item_id:
+            return Tag(item_id=item_id, material=bin_name, bin=_STICKER_BINS[bin_name], raw=text.strip())
+        return None
     if len(parts) != 4 or parts[0] != prefix:
         return None
     _, item_id, material, bin_id = parts

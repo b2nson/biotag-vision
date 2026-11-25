@@ -197,3 +197,12 @@ def test_app_unknown_item_goes_to_landfill(sim, tmp_path):
         assert sim.received[-1][:2] == ["OPEN", "L"]
     finally:
         link.stop()
+
+
+def test_printed_sticker_payloads_are_accepted():
+    from biotag.tag_reader import parse_payload
+    t = parse_payload("BIOTAG:COMPOST:001000")
+    assert (t.bin, t.item_id, t.material) == ("C", "001000", "COMPOST")
+    assert parse_payload("BIOTAG:RECYCLE:001000").bin == "R"
+    assert parse_payload("BIOTAG:LANDFILL:001000").bin == "L"
+    assert parse_payload("BIOTAG:NOPE:001000") is None
