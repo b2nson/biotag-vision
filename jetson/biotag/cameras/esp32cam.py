@@ -1,4 +1,4 @@
-"""ESP32-CAM over Wi-Fi (firmware/esp32cam_stream).
+"""ESP32-CAM over Wi-Fi (camera/esp32cam_stream).
 
 Reads the MJPEG stream at http://<ip>:81/stream in a background thread and
 always hands back the newest frame, so a slow consumer never builds up lag.

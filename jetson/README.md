@@ -18,7 +18,9 @@ it out").
 The Jetson does the vision and decides. The ESP32 does the real-time work
 (servo motion, sensors, closing safely) so a slow frame never stalls a lid.
 
-## What is in this folder
+## Folder layout
+
+`jetson/` (this folder) is the Jetson app. `camera/` holds the ESP32-CAM firmware and camera setup guide. `bin_controller/` holds the lid-controller firmware and wiring. Paths below are from the repo root unless they start with `jetson/`.
 
 | Path | What it is |
 |---|---|
@@ -27,9 +29,9 @@ The Jetson does the vision and decides. The ESP32 does the real-time work
 | `jetson/biotag/esp32_link.py` | Jetson side of the Jetson-ESP32 connection |
 | `jetson/tools/` | Tag generator, camera check, link check, ESP32 simulator, training, robustness test |
 | `jetson/tests/` | 47 automated tests, no hardware needed |
-| `firmware/bin_controller/` | ESP32 firmware: lids, sensors, protocol (PlatformIO) |
-| `firmware/esp32cam_stream/` | ESP32-CAM firmware: MJPEG video over Wi-Fi (PlatformIO) |
-| `docs/` | Wiring, Jetson-ESP32 protocol, camera setup, Jetson setup |
+| `bin_controller/` | ESP32 firmware: lids, sensors, protocol (PlatformIO), plus `wiring.md` |
+| `camera/` | `esp32cam_stream/` firmware (MJPEG over Wi-Fi) and `README.md` camera setup |
+| `jetson/docs/` | Jetson setup and the Jetson-ESP32 protocol |
 
 ## Try it in five minutes, with no hardware
 
@@ -48,11 +50,11 @@ read, the lid command sent, and the simulated lid close.
 
 ## Build order on the real hardware
 
-1. **Jetson setup** - `docs/setup_jetson.md`
-2. **Flash the ESP32** - `cd firmware/bin_controller && pio run -t upload`
-3. **Wire it** - `docs/wiring.md`
+1. **Jetson setup** - `jetson/docs/setup_jetson.md`
+2. **Flash the ESP32** - `cd bin_controller && pio run -t upload`
+3. **Wire it** - `bin_controller/wiring.md`
 4. **Check the link** - `python3 tools/check_link.py` (cycles each lid)
-5. **Check a camera** - `python3 tools/check_camera.py csi` (or `zed`, `esp32cam`) - `docs/cameras.md`
+5. **Check a camera** - `python3 tools/check_camera.py csi` (or `zed`, `esp32cam`) - `camera/README.md`
 6. **Print tags** - `python3 tools/generate_tags.py --demo`
 7. **Run** - `python3 -m biotag.main` (camera is chosen in `config.yaml`)
 8. **Add the vision fallback** - `tools/train.py`, then put the model at `jetson/models/biotag.engine`

@@ -6,17 +6,17 @@ All three cameras feed the same pipeline. Pick one in `jetson/config.yaml`
 | | Pi Camera (CSI) | ZED 2 | ESP32-CAM |
 |---|---|---|---|
 | Connection | Ribbon cable to the Jetson | USB 3.0 | Wi-Fi |
-| Driver | `cameras/csi.py` | `cameras/zed.py` | `cameras/esp32cam.py` |
+| Driver | `jetson/biotag/cameras/csi.py` | `jetson/biotag/cameras/zed.py` | `jetson/biotag/cameras/esp32cam.py` |
 | Depth | No | Yes | No |
 | "Item present" detection | Background comparison | Distance from the depth map | Background comparison |
 | Image quality for small tags | Good | Good | Lowest (JPEG, 800x600) |
 | Delay | Lowest | Low | Highest, depends on Wi-Fi |
-| Extra software | None | ZED SDK | Flash `firmware/esp32cam_stream` |
+| Extra software | None | ZED SDK | Flash `camera/esp32cam_stream` |
 | Best use | Main camera | When you want depth-based triggering | Cheap second view or wireless demo |
 
 Suggested plan: build around the Pi Camera, show the ZED 2 as the depth-enabled
 option, and use the ESP32-CAM to demonstrate a low-cost wireless alternative and
-to compare read rates. `tools/check_camera.py <type>` prints the frame rate and
+to compare read rates. `jetson/tools/check_camera.py <type>` prints the frame rate and
 any tag it reads, which gives you numbers for that comparison.
 
 ## Pi Camera on the Jetson Orin Nano
@@ -32,7 +32,7 @@ any tag it reads, which gives you numbers for that comparison.
 ```bash
 sudo /opt/nvidia/jetson-io/jetson-io.py   # Configure CSI connector -> pick IMX219 (or IMX477) -> save, reboot
 ls /dev/video*                            # the sensor should be listed
-python3 tools/check_camera.py csi
+python3 jetson/tools/check_camera.py csi
 ```
 
 - The driver uses GStreamer (`nvarguscamerasrc`). OpenCV must be the JetPack
@@ -46,7 +46,7 @@ python3 tools/check_camera.py csi
 - Install the ZED SDK build that matches your JetPack version from
   stereolabs.com, then its Python API (the installer offers this; otherwise
   run the SDK's `get_python_api.py`).
-- `python3 tools/check_camera.py zed` prints the frame rate and the distance at
+- `python3 jetson/tools/check_camera.py zed` prints the frame rate and the distance at
   the centre of the image.
 - The depth map is what makes this camera useful here: an item counts as
   "present" when enough of the centre of the view is between
@@ -59,7 +59,7 @@ python3 tools/check_camera.py csi
 
 ## ESP32-CAM (AI-Thinker)
 
-1. `cd firmware/esp32cam_stream`, copy `include/secrets.example.h` to
+1. `cd camera/esp32cam_stream`, copy `include/secrets.example.h` to
    `include/secrets.h` and edit it.
 2. Flash with an FTDI adapter or an ESP32-CAM-MB board: `pio run -t upload`.
 3. Choose a Wi-Fi mode in `secrets.h`:
@@ -68,7 +68,7 @@ python3 tools/check_camera.py csi
      which suits a demo room, but the Jetson's Wi-Fi is then not on the internet.
    - `CAM_AP_MODE 0`: the camera joins your network and prints its address on
      the serial monitor. Put that address in `camera.esp32cam.url`.
-4. `python3 tools/check_camera.py esp32cam`
+4. `python3 jetson/tools/check_camera.py esp32cam`
 
 Things to know:
 - Open `http://<address>/` in a browser to check it, then close the tab: the
@@ -84,4 +84,4 @@ Things to know:
 - Use a plain, matte, fixed background. The Pi Camera and ESP32-CAM detect an
   item by comparing against that background.
 - A tag should be at least about 150 pixels wide in the image to read reliably.
-  Check with `tools/check_camera.py` at the distance people will actually hold items.
+  Check with `jetson/tools/check_camera.py` at the distance people will actually hold items.

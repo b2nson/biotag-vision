@@ -10,3 +10,9 @@ data/real/*
 !data/real/.keep
 logs/
 .venv/
+.pytest_cache/
+.pio/
+tags/
+jetson/models/*
+!jetson/models/.gitkeep
+camera/esp32cam_stream/include/secrets.h

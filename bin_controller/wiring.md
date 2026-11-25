@@ -53,7 +53,7 @@ Text lines at 115200 baud, each with a checksum, for example `$OPEN,R,8000*4E`.
 The Jetson sends a command, the ESP32 acknowledges it, and the ESP32 reports
 events such as `EVT,CLOSED,R,DEPOSIT` on its own. The Jetson retries if no
 acknowledgement arrives, pings every 2 seconds, and reconnects if the cable is
-unplugged. Full details: `docs/protocol.md`.
+unplugged. Full details: `jetson/docs/protocol.md`.
 
 ## ESP32 lid controller pins
 
@@ -69,7 +69,7 @@ unplugged. Full details: `docs/protocol.md`.
 | Activity LED | GPIO2 | on-board; blinks on each valid command |
 
 Pins and angles are constants at the top of
-`firmware/bin_controller/src/main.cpp`.
+`bin_controller/src/main.cpp`.
 
 ## Power
 

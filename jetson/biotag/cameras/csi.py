@@ -2,7 +2,7 @@
 
 Supported sensors on the Orin Nano: IMX219 (Pi Camera v2) and IMX477 (Pi HQ
 Camera). The Pi Camera v3 (IMX708) has no stock NVIDIA driver. See
-docs/cameras.md for the ribbon cable and jetson-io steps.
+camera/README.md for the ribbon cable and jetson-io steps.
 
 Frames come through GStreamer (nvarguscamerasrc), so OpenCV must be built with
 GStreamer - the JetPack OpenCV is; `pip install opencv-python` is NOT.

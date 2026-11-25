@@ -2,7 +2,7 @@
 
 A frame is one ASCII line:   $FIELD,FIELD,...*XX\\n
 XX is the XOR of every byte between '$' and '*', as two uppercase hex digits.
-The same framing is implemented in firmware/bin_controller/src/main.cpp.
+The same framing is implemented in bin_controller/src/main.cpp.
 """
 from __future__ import annotations
 

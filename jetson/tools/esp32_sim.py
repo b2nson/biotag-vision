@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Software stand-in for the ESP32 lid controller (Linux/macOS).
 
-Creates a pseudo serial port and behaves like firmware/bin_controller, so the
+Creates a pseudo serial port and behaves like bin_controller, so the
 Jetson software can be developed and tested with no hardware:
 
     python3 tools/esp32_sim.py            # prints a port such as /dev/pts/5

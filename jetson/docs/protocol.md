@@ -14,7 +14,7 @@ Jetson and answered with `NAK,CSUM` by the ESP32, so electrical noise or the
 ESP32's boot messages can never open a lid.
 
 Implemented in `jetson/biotag/protocol.py` and
-`firmware/bin_controller/src/main.cpp`.
+`bin_controller/src/main.cpp`.
 
 ## Jetson to ESP32
 

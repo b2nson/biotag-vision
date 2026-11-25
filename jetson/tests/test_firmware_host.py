@@ -8,7 +8,7 @@ import pytest
 
 from biotag import protocol
 
-FW = Path(__file__).resolve().parents[2] / "firmware" / "bin_controller"
+FW = Path(__file__).resolve().parents[2] / "bin_controller"
 pytestmark = pytest.mark.skipif(shutil.which("g++") is None, reason="g++ not installed")
 
 
