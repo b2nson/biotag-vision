@@ -27,7 +27,7 @@ The Jetson does the vision and decides. The ESP32 does the real-time work
 | `jetson/biotag/` | Jetson application (Python) |
 | `jetson/biotag/cameras/` | Drivers: `csi.py` (Pi Camera), `zed.py` (ZED 2), `esp32cam.py`, plus USB and mock |
 | `jetson/biotag/esp32_link.py` | Jetson side of the Jetson-ESP32 connection |
-| `jetson/tools/` | Tag generator, camera check, link check, ESP32 simulator, training, robustness test |
+| `jetson/tools/` | Tag generator, camera check, link check, ESP32 simulator, direct-PWM servo test (no ESP32), training, robustness test |
 | `jetson/tests/` | 47 automated tests, no hardware needed |
 | `bin_controller/` | ESP32 firmware: lids, sensors, protocol (PlatformIO), plus `wiring.md` |
 | `camera/` | `esp32cam_stream/` firmware (MJPEG over Wi-Fi) and `README.md` camera setup |
