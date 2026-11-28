@@ -3,7 +3,7 @@
 
 Turns the servo from its start angle to start+90 degrees, holds, then turns it back.
 
-    sudo python3 tools/servo_direct.py                 # pin 33, 0 -> 90 -> 0
+    sudo python3 tools/servo_direct.py                 # pin 33, 75 -> 165 -> 75
     sudo python3 tools/servo_direct.py --pin 15 --hold 2
     sudo python3 tools/servo_direct.py --cycles 5
 
@@ -51,7 +51,7 @@ def sweep(pwm, start: float, end: float, args) -> None:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--pin", type=int, default=33, help="BOARD pin number with PWM enabled (15, 32 or 33)")
-    ap.add_argument("--start", type=float, default=0, help="rest angle, degrees")
+    ap.add_argument("--start", type=float, default=75, help="rest angle, degrees")
     ap.add_argument("--turn", type=float, default=90, help="how far to turn, degrees")
     ap.add_argument("--hold", type=float, default=1.0, help="seconds to stay turned")
     ap.add_argument("--cycles", type=int, default=1)
