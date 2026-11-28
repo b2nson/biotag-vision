@@ -12,7 +12,13 @@ Setup once (Jetson Orin Nano, JetPack 5/6):
   2. sudo /opt/nvidia/jetson-io/jetson-io.py
        -> Configure Jetson 40pin Header -> Configure header pins manually
        -> enable the pwm on your pin (pin 33 = pwm5, 32 = pwm7, 15 = pwm1), save, reboot
-  3. Wiring:
+     or non-interactively: sudo /opt/nvidia/jetson-io/config-by-function.py -o dt pwm5
+     (-o dtbo only writes the file and does not apply it at boot)
+  3. Pin 33 only: pwm5 runs from a 408 MHz clock by default and can't go below ~195 Hz,
+     so pwm.start() fails with "OSError: [Errno 22] Invalid argument" at 50 Hz.
+     Install dt/biotag-pwm5-50hz.dtbo (see dt/biotag-pwm5-50hz.dts) to move it to the
+     19.2 MHz clock, then reboot. Duty resolution is 8 bits, so ~7 degree steps at 50 Hz.
+  4. Wiring:
        servo signal (orange/yellow) -> header pin 33
        servo + (red)                -> external 5-6 V supply, NOT the Jetson's 5 V pin
        servo - (brown/black)        -> supply GND, and supply GND -> Jetson GND (e.g. pin 34)

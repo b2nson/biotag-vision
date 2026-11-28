@@ -1,0 +1,36 @@
+/*
+ * Slow down pin 33's PWM (pwm5 @ 32c0000) so it can make a 50 Hz servo signal.
+ *
+ * By default pwm5 runs from a 408 MHz clock, and the Tegra PWM divider can't
+ * get below ~195 Hz from that (enable fails with EINVAL at 50 Hz). This moves
+ * it to clk_m (19.2 MHz), which reaches down to ~9 Hz.
+ *
+ * Clock IDs are from dt-bindings/clock/tegra234-clock.h; 3 is the BPMP phandle
+ * on this board (cat /proc/device-tree/bpmp/phandle).
+ *
+ * Build and install:
+ *   dtc -@ -I dts -O dtb -o biotag-pwm5-50hz.dtbo biotag-pwm5-50hz.dts
+ *   sudo cp biotag-pwm5-50hz.dtbo /boot/
+ *   then append /boot/biotag-pwm5-50hz.dtbo to the OVERLAYS line in
+ *   /boot/extlinux/extlinux.conf (comma separated) and reboot.
+ */
+/dts-v1/;
+/plugin/;
+
+/ {
+	overlay-name = "BioTag pwm5 50 Hz clock";
+	compatible = "nvidia,p3768-0000+p3767-0000", "nvidia,p3768-0000+p3767-0001",
+		     "nvidia,p3768-0000+p3767-0003", "nvidia,p3768-0000+p3767-0004",
+		     "nvidia,p3768-0000+p3767-0005", "nvidia,p3768-0000+p3767-0000-super",
+		     "nvidia,p3768-0000+p3767-0001-super", "nvidia,p3768-0000+p3767-0003-super",
+		     "nvidia,p3768-0000+p3767-0004-super", "nvidia,p3768-0000+p3767-0005-super";
+
+	fragment@0 {
+		target-path = "/bus@0/pwm@32c0000";
+		__overlay__ {
+			assigned-clocks = <3 109>;		/* TEGRA234_CLK_PWM5 */
+			assigned-clock-parents = <3 14>;	/* TEGRA234_CLK_CLK_M */
+			assigned-clock-rates = <19200000>;
+		};
+	};
+};
